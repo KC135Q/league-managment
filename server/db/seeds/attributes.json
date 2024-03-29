@@ -1,0 +1,17 @@
+[
+  {
+    "attributeName": "Full Access"
+  },
+  {
+    "attributeName": "Group Only"
+  },
+  {
+    "attributeName": "Review Required"
+  },
+  {
+    "attributeName": "Public View"
+  },
+  {
+    "attributeName": "No Access"
+  }
+]

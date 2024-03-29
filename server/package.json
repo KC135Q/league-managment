@@ -1,0 +1,31 @@
+{
+  "name": "abac-basic",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "seed": "node --trace-warnings ./db/seeds/seed.js",
+    "seeds": "npm run seed",
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "test": "jest --detectOpenHandles"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "morgan": "~1.9.1",
+    "pg": "^8.11.3",
+    "sequelize": "^6.35.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "faker": "^6.6.6",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.4"
+  }
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "groupName": "Premier League",
+    "parentGroupId": null,
+    "childGroupIds": [3, 4, 5]
+  },
+  {
+    "groupName": "English Football League",
+    "parentGroupId": null,
+    "childGroupIds": [6, 7, 8]
+  },
+  {
+    "groupName": "Arsenal",
+    "parentGroupId": 1
+  },
+  {
+    "groupName": "Chelsea",
+    "parentGroupId": 1
+  },
+  {
+    "groupName": "Liverpool",
+    "parentGroupId": 1
+  },
+  {
+    "groupName": "Cambridge United",
+    "parentGroupId": 2
+  },
+  {
+    "groupName": "Derby County",
+    "parentGroupId": 2
+  },
+  {
+    "groupName": "Arsenal Southern",
+    "parentGroupId": 2
+  }
+]
