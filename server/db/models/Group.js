@@ -53,7 +53,7 @@ Group.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'group',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 
