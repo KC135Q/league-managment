@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import authRequest from '../../api/auth';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Implement your login logic here
     console.log('Logging in with:', email, password);
+    try {
+      const response = await authRequest('POST', 'auth/login', {
+        email,
+        password,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
