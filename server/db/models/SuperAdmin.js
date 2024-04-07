@@ -22,7 +22,7 @@ SuperAdmin.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'super_admin',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 

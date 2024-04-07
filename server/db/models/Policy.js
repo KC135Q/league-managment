@@ -16,7 +16,7 @@ Policy.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'policy',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 

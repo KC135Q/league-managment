@@ -33,7 +33,7 @@ Member.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'member',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 

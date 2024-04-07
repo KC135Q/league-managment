@@ -44,7 +44,7 @@ Membership.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'membership',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 

@@ -16,7 +16,7 @@ Attribute.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'attribute',
-    schema: 'member_schema',
+    schema: 'public',
   }
 );
 

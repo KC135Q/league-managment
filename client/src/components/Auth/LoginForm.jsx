@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import authRequest from "../../api/auth";
+import { useAuth } from "./AuthContext";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("andrea@kaltenbaugh.com");
+  const [password, setPassword] = useState("andread1234");
+  const { login, isAuthenticated } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Implement your login logic here
-    console.log('Logging in with:', email, password);
+    try {
+      const response = await authRequest("POST", "auth/login", {
+        email,
+        password,
+      });
+      login(response.token);
+
+      if (isAuthenticated()) {
+        const previousPage = document.referrer;
+        if (previousPage.includes(window.location.origin)) {
+          window.location.href = previousPage;
+        } else {
+          window.location.href = "/";
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -9,7 +9,7 @@ const { serverError } = require('../../../utils/strings');
 router.get('/', setMemberAccess, async (req, res) => {
   try {
     const group = await getAllGroups(req);
-    res.status(group.status).json(group.data);
+    res.status(group.status).json(group);
   } catch (error) {
     res
       .status(error.status || 500)

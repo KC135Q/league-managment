@@ -127,6 +127,8 @@ const getGroupById = async (req) => {
       return response;
     } else {
       response.data = groupData;
+      response.data.dataValues.children = await groupData.getChildGroups();
+      console.log(response);
       return response;
     }
   } catch (error) {
