@@ -1,18 +1,16 @@
 import React from "react";
-import NavBar from "./NavBar";
 import SideBar from "./SideBar";
-import GroupManagement from "../Group/GroupManagement";  // Default main content
+import GroupManagement from "../Group/GroupManagement"; // Default main content
 
 const MainLayout = () => {
   return (
-    <div>
-      <NavBar />
-      <div style={{ display: "flex" }}>
+    <div className="container mx-auto px-4 flex flex-row">
+      <aside>
         <SideBar />
-        <main style={{ flexGrow: 1 }}>
-          <GroupManagement />
-        </main>
-      </div>
+      </aside>
+      <main>
+        <GroupManagement />
+      </main>
     </div>
   );
 };

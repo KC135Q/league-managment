@@ -2,7 +2,9 @@ import React from "react";
 
 const SideBar = () => {
   return (
-    <h1>Side Bar</h1>
+    <section className="flex flex-start" style={{ minWidth: "10rem" }}>
+      <p>Side Bar</p>
+    </section>
   );
 };
 
