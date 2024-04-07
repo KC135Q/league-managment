@@ -9,7 +9,7 @@ const GroupManagement = () => {
     const fetchData = async () => {
       try {
         const result = await fetchApi("/api/v1/group", {});
-        setGroups(result);
+        setGroups(result.data);
       } catch (error) {
         console.error("API error:", error);
       }
@@ -38,8 +38,7 @@ const GroupManagement = () => {
           ))}
         </div>
       )}
-      <hr className="my-5" />
-      <h2 className="text-2xl font-bold">Add Group</h2>
+
     </section>
   );
 };

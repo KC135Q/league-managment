@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import fetchApi from "../../utils/apiService";
 
 const GroupDetails = () => {
   const { groupId } = useParams();
   const [group, setGroup] = useState({});
+  const [showChildren, setShowChildren] = useState(false);
   const [groupName, setGroupName] = useState("");
 
   const [parentGroupId, setParentGroupId] = useState(groupId);
@@ -35,6 +36,7 @@ const GroupDetails = () => {
         const result = await fetchApi(`/api/v1/group/${groupId}`, {});
         console.log(result);
         setGroup(result);
+        setShowChildren(!showChildren);
       } catch (error) {
         console.error("API error:", error);
       }
@@ -44,11 +46,33 @@ const GroupDetails = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-8">
       <p className="text-2xl font-bold">{group.groupName}</p>
-      <p></p>
-        <hr className="my-5" />
-        <h2 className="text-2xl font-bold">Add Subgroup to {group.groupName}</h2>
+      <hr className="my-5" />
+      <section className="mt-8">
+
+        { showChildren && group?.children?.length > 0 ? (
+          <div id="group-list" className="grid grid-cols-3 gap-4 mt-4">
+            {group.children.map((child) => (
+              <Link to={`/groups/${child.id}`} key={child.id}>
+              <div
+                key={child.id}
+                className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg"
+                data-group-id={child.id}
+              >
+                <h2 className="text-xl font-bold">{child.groupName}</h2>
+                <p>{child.description}</p>
+              </div>
+
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p>No subgroups found</p>
+        )}
+      </section>
+      <hr className="my-5" />
+      <h2 className="text-2xl font-bold">Add Subgroup to {group.groupName}</h2>
       <form onSubmit={handleAddGroup} className="mt-4">
         <input
           type="text"

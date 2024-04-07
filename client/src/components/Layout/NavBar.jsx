@@ -14,7 +14,7 @@ function NavBar() {
   return (
     <nav className="bg-gray-800 p-3 text-white">
       <div className="container mx-auto flex justify-between">
-        <div className="text-lg">League Management</div>
+        <div className="text-lg" onClick={() => {window.location.href = '/';}}>League Management</div>
         <div>
           {isLoggedIn ? (
             <button onClick={handleLogout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

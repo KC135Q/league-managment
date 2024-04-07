@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../../config/database');
+const { DataTypes, Model } = require("sequelize");
+const sequelize = require("../../config/database");
 
 class Group extends Model {
   // Define a method for retrieving all children groups recursively
@@ -9,7 +9,7 @@ class Group extends Model {
         where: {
           parentGroupId: groupId,
         },
-        attributes: ['id'], // Select only the 'id' attribute
+        attributes: ["id"], // Select only the 'id' attribute
       });
 
       const childIds = childGroups.map((group) => group.id);
@@ -24,6 +24,21 @@ class Group extends Model {
 
     const childIds = await getChildIds(this.id);
     return childIds;
+  }
+
+  // Add this method to the Group model
+  async getChildGroups() {
+    const childIds = await this.getAllChildrenGroupIds(); // Retrieve all child IDs recursively
+    if (!childIds.length) return []; // If there are no children, return an empty array
+
+    const childGroups = await Group.findAll({
+      where: {
+        id: childIds,
+      },
+      raw: true,
+    });
+
+    return childGroups;
   }
 }
 
@@ -52,8 +67,8 @@ Group.init(
     updatedAt: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'group',
-    schema: 'public',
+    modelName: "group",
+    schema: "public",
   }
 );
 
@@ -61,10 +76,14 @@ const addChildGroup = async (parentGroupId, childGroupId) => {
   const parentGroup = await Group.findByPk(parentGroupId);
 
   if (!parentGroup) {
-    return; 
+    return;
   }
 
-  console.log("DAK: 67 ~ parentGroupId, parentGroup.childGroupIds ", parentGroupId, parentGroup.childGroupIds);
+  console.log(
+    "DAK: 67 ~ parentGroupId, parentGroup.childGroupIds ",
+    parentGroupId,
+    parentGroup.childGroupIds
+  );
   let childGroupIds = parentGroup.childGroupIds || [];
   if (childGroupIds.includes(childGroupId)) {
     return;
@@ -72,7 +91,11 @@ const addChildGroup = async (parentGroupId, childGroupId) => {
     childGroupIds = [...childGroupIds, childGroupId];
   }
 
-  console.log("DAK: 75 ~ childGroupIds, childGroupId: ", childGroupIds, childGroupId);
+  console.log(
+    "DAK: 75 ~ childGroupIds, childGroupId: ",
+    childGroupIds,
+    childGroupId
+  );
   const newParentGroup = await parentGroup.update({
     childGroupIds,
   });
@@ -80,16 +103,20 @@ const addChildGroup = async (parentGroupId, childGroupId) => {
 };
 
 const removeGroup = async (removedGroupInstance = null) => {
-  /** 
+  /**
    * Deleting a group so parentId and childIds
    * - Go to parentId and remove the group from the childIds array
    * - Go to all the children and remove the group from the parentId -- replace it with null for now.
    */
   console.log("DAK: 89 ~ removedGroupInstance: ", removedGroupInstance);
   return;
-} 
+};
 
-const updateChildGroups = async (parentGroupid, childGroupId, deletedId = null) => {
+const updateChildGroups = async (
+  parentGroupid,
+  childGroupId,
+  deletedId = null
+) => {
   /**
    * Add a group with a parentGroupId
    * Update a group's parentGroupId (?)
@@ -121,12 +148,12 @@ const updateChildGroups = async (parentGroupid, childGroupId, deletedId = null) 
   await updateChildGroups(parentGroup.parentGroupId);
 };
 
-Group.addHook('afterDestroy', async (instance, _options) => {
+Group.addHook("afterDestroy", async (instance, _options) => {
   console.log("DAK: 125");
- await removeGroup(instance);
+  await removeGroup(instance);
 });
 
-Group.addHook('afterCreate', async (instance, _options) => {
+Group.addHook("afterCreate", async (instance, _options) => {
   // Update the childGroupIds field for the parent group
   console.log("DAK: 120 ~ instance: ", instance);
   if (!instance.parentGroupId) {
