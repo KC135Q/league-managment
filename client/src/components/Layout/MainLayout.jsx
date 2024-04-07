@@ -1,6 +1,6 @@
 import React from "react";
 import SideBar from "./SideBar";
-import GroupManagement from "../Group/GroupManagement"; // Default main content
+import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
@@ -8,9 +8,7 @@ const MainLayout = () => {
       <aside>
         <SideBar />
       </aside>
-      <main>
-        <GroupManagement />
-      </main>
+      <Outlet />
     </div>
   );
 };
